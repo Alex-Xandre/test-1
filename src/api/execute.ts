@@ -1,11 +1,10 @@
-
 import { cohere } from '../clients/cohereClient';
 import { searchPlaces } from '../clients/foursquareClient';
 import { AUTH_CODE } from '../config';
 import { CommandI } from '../types/command';
-import { VercelRequest, VercelResponse } from '@vercel/node';
 
-export default  async function handler(req: VercelRequest, res: VercelResponse) {
+import { Request, Response } from 'express';
+export default async function execute(req: Request, res: Response) {
   const userMessage = req.query.message as string;
   const code = req.query.code as string;
 
@@ -94,7 +93,7 @@ User request: "${userMessage.trim()}"`,
       email: place.email || null,
       tel: place.tel || null,
     }));
-    console.log(results)
+    console.log(results);
     const filteredResults =
       //@ts-ignore
       typeof p.rating === 'number' ? results.filter((r) => r.rating !== null && r.rating >= p.rating) : results;
