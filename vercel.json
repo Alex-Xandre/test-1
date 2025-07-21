@@ -1,0 +1,5 @@
+{
+  "routes": [
+    { "src": "/api/execute", "dest": "/api/execute.ts" }
+  ]
+}
